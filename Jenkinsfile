@@ -7,11 +7,11 @@ pipeline {
 
     environment {
         DISABLE_AUTH = 'true'
-        DB_ENGINE    = 'foobar'
+        DB_ENGINE    = 'fooba'
     }
 
     stages {
-        stage('Build') {
+        stage('Foo') {
             steps {
                 sh 'mvn --version'
                 sh '''
@@ -20,6 +20,11 @@ pipeline {
                    printenv
                    exit 0
                 '''
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
             }
         }
     }
