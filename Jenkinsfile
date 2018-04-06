@@ -1,5 +1,15 @@
 pipeline {
-    agent { docker { image 'maven:3.3.3' } }
+    agent {
+        docker {
+            image 'maven:3.3.3'
+        }
+    }
+
+    environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'foobar'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -7,6 +17,7 @@ pipeline {
                 sh '''
                    echo "Multiline shell steps works too"
                    ls -lah
+                   printenv
                    exit 0
                 '''
             }
